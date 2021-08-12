@@ -1,0 +1,19 @@
+name: Publish Docker
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    step:
+      - uses: actions/checkout@main
+      - name: Publish to registry
+        uses: elgohr/Publish-Docker-Github-Action@main
+        with:
+          registry: docker.pkg.github.com
+          name: docker.pkg.github.com/YrPryhoda/nestts-courseslist/nestts-courseslist
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          tags: 'development'
